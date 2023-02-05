@@ -80,7 +80,7 @@ DATABASES = {
         'HOST':'localhost',
         'PORT':'3306',
         'USER':'root',
-        'PASSWORD':'123456',
+        'PASSWORD':'root',
         'NAME':'django_api', # nombre de las base de datos
         'OPTIONS':{
             'init_command':"SET sql_mode='STRICT_TRANS_TABLES'" # para que no salte advertencia al conectarnos
