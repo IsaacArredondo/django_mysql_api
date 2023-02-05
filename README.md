@@ -7,12 +7,15 @@ El primer paso es crear un entorno virtual para nuestro proyecto con el comando:
 ```
 conda create -p django_mysql_api
 conda activate django_mysql_api/
+conda install python
 ```
 
-Una vez creado, procedemos a instalar el framework django de la siguiente forma:
+Una vez creado, procedemos a instalar el framework django, junto con mysqlclient y pymysql de la siguiente forma:
 
 ```
-pip install django==3.2.4
+pip install django
+pip install mysqlclient
+pip install pymysql
 ```
 
 Tambien creamos el archivo .gitignore para ignorar la ruta de nuestri entorno virtual. Y creamos un repositorio en GitHub para darle continuidad a nuestro proyecto, una vez creado, lo sincronizamos con nuestra carpeta con los siguientes comandos:
@@ -43,7 +46,7 @@ DATABASES = {
         'HOST':'localhost',
         'PORT':'3306',
         'USER':'root',
-        'PASSWORD':'123456',
+        'PASSWORD':'root',
         'NAME':'django_api', # nombre de las base de datos
         'OPTIONS':{
             'init_command':"SET sql_mode='STRICT_TRANS_TABLES'" # para que no salte advertencia al conectarnos
@@ -52,4 +55,41 @@ DATABASES = {
 }
 ```
 
-### El Tercer Paso: Crear un modelo.
+### El Tercer Paso: Crear un modelo y Conectarlo a MySQL.
+
+Para ello utilizamos los archivos models.py y admin.py. Verificamos la conexión con el comando:
+
+```
+python manage.py migrate
+```
+
+El comando anterior creara 10 tables por defecto en la base de datos "django_api".
+
+Ahora creamos un superusuario con el comando:
+
+```
+python manage.py createsuperuser
+```
+
+Y realizamos la migración de modelo con:
+
+```
+python manage.py makemigrations
+```
+
+Ahora probamos nuestro panel de administración django ejecutando nuestro servidor con el comando:
+
+```
+python manage.py runserver
+```
+
+### El Cuarto Paso: Crear Views y Urls
+
+- Comienzo a crear vistas basadas en una clase.
+- Archivos de rutas.
+- Método GET para listar companies.
+- Respuesta Json
+- Descargar Thunder Client para probar requests.
+- Create el Método POST
+- CSRF (Cross-site request forgery) para brindar seguridad en el POST.
+- Método GET para leer companies por id.
