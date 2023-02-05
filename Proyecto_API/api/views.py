@@ -55,5 +55,11 @@ class CompanyView(View):
             datos = {'mesaage' : "Company not found ..."}
         return JsonResponse(datos)
 
-    def delete(self, request):
-        pass
+    def delete(self, request, id):
+        companies = list(Company.objects.filter(id=id).values())
+        if len(companies) > 0:
+            Company.objects.filter(id=id).delete()
+            datos = {'message': "Success"}            
+        else:
+            datos = {'message': "Company not found ... "}
+        return JsonResponse(datos)
